@@ -2,6 +2,7 @@ RegisterCommand('car', function(args)
     local x,y,z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 8.0, 0.5))
     local veh = args[1]
     local type = args[2]
+    local ped = cache.ped
     if veh == nil then veh = "adder" end
     vehiclehash = GetHashKey(veh)
     RequestModel(vehiclehash)
@@ -25,7 +26,6 @@ RegisterCommand('car', function(args)
                 type = 'success'
             })
             Wait(1000)
-            local ped = PlayerPedId()
             local vehicle = GetVehiclePedIsIn(ped, false)
             exports["ND_VehicleSystem"]:setVehicleLocked(vehicle, false)
             lib.notify({
@@ -39,7 +39,6 @@ RegisterCommand('car', function(args)
                 type = 'success'
             })
             Wait(1000)
-            local ped = PlayerPedId()
             local vehicle = GetVehiclePedIsIn(ped, false)
             local props = lib.getVehicleProperties(vehicle)
             TriggerServerEvent("ND_CarSpawnerCommand:setVehicleOwned", props)
